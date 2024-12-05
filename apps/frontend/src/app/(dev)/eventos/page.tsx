@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { eventos } from '@/core'
+import { eventos } from 'core'
 import { QRCode } from 'react-qrcode'
 
 export default function PaginaEventos() {

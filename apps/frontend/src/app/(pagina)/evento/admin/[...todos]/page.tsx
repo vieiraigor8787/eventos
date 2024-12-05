@@ -2,7 +2,7 @@
 
 import { use, useEffect, useState } from 'react'
 
-import { Convidado, Evento, eventos } from '@/core'
+import { Convidado, Evento, eventos } from 'core'
 import DashboardEvento from '@/components/evento/DashboardEvento'
 import FormSenhaEvento from '@/components/evento/FormSenhaEvento'
 
