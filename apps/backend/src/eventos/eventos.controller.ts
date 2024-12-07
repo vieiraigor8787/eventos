@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { Data, Evento, eventos, Id } from 'core';
 
 @Controller('eventos')
@@ -6,6 +6,14 @@ export class EventosController {
   @Get()
   async buscarEventos() {
     return eventos.map(this.serializar);
+  }
+  @Post('acessar')
+  async acessarEvento(@Body() dados: { id: string; senha: string }) {
+    const evento = eventos.find(
+      (evento) => evento.id === dados.id && dados.senha,
+    );
+
+    return evento;
   }
 
   @Get(':idOuAlias')
