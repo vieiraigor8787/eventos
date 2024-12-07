@@ -10,10 +10,12 @@ export class EventosController {
   @Post('acessar')
   async acessarEvento(@Body() dados: { id: string; senha: string }) {
     const evento = eventos.find(
-      (evento) => evento.id === dados.id && dados.senha,
+      (evento) => evento.id === dados.id && evento.senha === dados.senha,
     );
 
-    return evento;
+    if (!evento) throw new Error('Senha não corresponde ao evento');
+
+    return this.serializar(evento);
   }
 
   @Get(':idOuAlias')
