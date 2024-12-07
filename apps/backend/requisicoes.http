@@ -33,3 +33,29 @@ Content-Type: application/json
   "possuiAcompanhantes": true,
   "qtdeAcompanhantes": 3
 }
+
+###
+POST http://localhost:4000/eventos
+Content-Type: application/json
+
+{
+    "id": "65965e1c-8055-4795-b4a3-65965e1cwqweq",
+    "alias": "semana-formacao-dev",
+    "nome": "Evento Semana Formação.DEV",
+    "data": "2025-12-31T23:00",
+    "local": "São Paulo",
+    "descricao": "Evento de tecnologia",
+    "senha": "frameworks2025",
+    "imagem": "https://www.formacao.dev/assets/img/formacao-dev.png",
+    "imagemBg": "https://www.formacao.dev/assets/img/formacao-dev-background.png",
+    "publicoEsperado": 1000,
+    "convidados": [
+        {
+            "nome": "Leonardo Leitão",
+            "email": "leonardo@formacao.dev",
+            "confirmado": true,
+            "possuiAcompanhantes": true,
+            "qtdeAcompanhantes": 10
+        }
+    ]
+}

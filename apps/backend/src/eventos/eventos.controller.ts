@@ -1,11 +1,32 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import { Convidado, Data, Evento, eventos, Id } from 'core';
+import {
+  complementarConvidado,
+  complementarEvento,
+  Convidado,
+  Data,
+  Evento,
+  eventos,
+  Id,
+} from 'core';
 
 @Controller('eventos')
 export class EventosController {
   @Get()
   async buscarEventos() {
     return eventos.map(this.serializar);
+  }
+
+  @Post()
+  async salvarEvento(@Body() evento: Evento) {
+    const eventoCadastrado = eventos.find((ev) => ev.alias === evento.alias);
+
+    if (eventoCadastrado && eventoCadastrado.id !== evento.id) {
+      throw new Error('Alias já está em uso.');
+    }
+
+    const eventoCompleto = complementarEvento(this.deserializar(evento));
+    eventos.push(eventoCompleto);
+    return this.serializar(eventoCompleto);
   }
 
   @Post(':alias/convidado')
@@ -17,7 +38,7 @@ export class EventosController {
 
     if (!evento) throw new Error('Evento não encontrado.');
 
-    evento.convidados.push(convidado);
+    evento.convidados.push(complementarConvidado(convidado));
     return this.serializar(evento);
   }
 
