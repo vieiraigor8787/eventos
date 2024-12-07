@@ -23,3 +23,6 @@ CREATE TABLE "convidados" (
     "eventoId" TEXT,
     CONSTRAINT "convidados_eventoId_fkey" FOREIGN KEY ("eventoId") REFERENCES "eventos" ("id") ON DELETE SET NULL ON UPDATE CASCADE
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "eventos_alias_key" ON "eventos"("alias");
