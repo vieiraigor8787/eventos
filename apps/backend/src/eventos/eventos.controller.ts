@@ -19,6 +19,13 @@ export class EventosController {
     }
   }
 
+  @Get('/validar/:alias/:id')
+  async validarAlias(@Param('id') id: string, @Param('alias') alias: string) {
+    const evento = eventos.find((evento) => evento.alias === alias);
+
+    return { valido: !evento || evento.id === id };
+  }
+
   private serializar(evento: Evento) {
     if (!evento) null;
     return {
