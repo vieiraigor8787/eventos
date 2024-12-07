@@ -20,3 +20,16 @@ Content-Type: application/json
   "id": "65965e1c-8055-4795-b4a3-da93bbe97e31",
   "senha": "familia2024!"
 }
+
+###
+POST http://localhost:4000/eventos/reuniao-familia-oliveira/convidado
+Content-Type: application/json
+
+{
+  "id": "65965e1c-8055-4795-b4a3-da93bbe97e31",
+  "nome": "Igor Cerqueira",
+  "email": "igo@email.com",
+  "confirmado": true,
+  "possuiAcompanhantes": true,
+  "qtdeAcompanhantes": 3
+}
