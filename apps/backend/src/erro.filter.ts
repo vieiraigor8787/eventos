@@ -17,7 +17,7 @@ export default class ErroFilter implements ExceptionFilter {
 
     res.status(status).json({
       statusCode: status,
-      timestamp: new Date().toISOString(),
+      timestamp: new Date().toISOString().split('.')[0],
       message: exception.message,
       path: req.url,
     });

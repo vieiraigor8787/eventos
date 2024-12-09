@@ -1,4 +1,11 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpException,
+  Param,
+  Post,
+} from '@nestjs/common';
 import {
   complementarConvidado,
   complementarEvento,
@@ -43,7 +50,7 @@ export class EventosController {
     const eventoCadastrado = eventos.find((ev) => ev.alias === evento.alias);
 
     if (eventoCadastrado && eventoCadastrado.id !== evento.id) {
-      throw new Error('Alias já está em uso.');
+      throw new HttpException('Alias já está em uso.', 400);
     }
 
     const eventoCompleto = complementarEvento(this.deserializar(evento));
@@ -57,7 +64,7 @@ export class EventosController {
   ) {
     const evento = await this.repo.buscarPorAlias(alias);
 
-    if (!evento) throw new Error('Evento não encontrado.');
+    if (!evento) throw new HttpException('Evento não encontrado.', 400);
 
     const convidadoCompleto = complementarConvidado(convidado);
 
@@ -67,10 +74,10 @@ export class EventosController {
   @Post('acessar')
   async acessarEvento(@Body() dados: { id: string; senha: string }) {
     const evento = await this.repo.buscarPorId(dados.id);
-    if (!evento) throw new Error('Evento não encontrado');
+    if (!evento) throw new HttpException('Evento não encontrado', 400);
 
     if (evento.senha !== dados.senha)
-      throw new Error('senha não corresponde ao evento');
+      throw new HttpException('senha não corresponde ao evento', 400);
 
     return this.serializar(evento);
   }
