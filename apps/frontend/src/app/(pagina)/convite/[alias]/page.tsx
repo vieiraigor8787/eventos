@@ -1,4 +1,4 @@
-export default function PaginaConvite(props: any) {
+export default function PaginaConvite() {
   return (
     <div>
       <span>convite</span>
